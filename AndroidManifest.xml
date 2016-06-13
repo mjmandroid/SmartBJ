@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.smartbj.ui.GuideActivity"></activity>
+        <activity android:name="com.example.smartbj.ui.MainActivity"></activity>
     </application>
 
 </manifest>

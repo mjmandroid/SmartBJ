@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 
 import com.example.smartbj.R;
+import com.example.smartbj.tools.MyConstants;
+import com.example.smartbj.tools.SPtools;
 
 /**
  * @author mjm
@@ -40,6 +45,15 @@ public class GuideActivity extends Activity{
 	}
 
 	private void initEvents() {
+		btn_tiya.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				SPtools.setBoolean(getApplicationContext(), MyConstants.ISSETUP, true);
+				Intent intent = new Intent(GuideActivity.this,MainActivity.class);
+				startActivity(intent);
+			}
+		});
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			
 			@Override
@@ -72,6 +86,15 @@ public class GuideActivity extends Activity{
 			iv.setImageResource(pics[i]);
 			iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			list.add(iv);
+			
+			View viewPoint = new View(getApplicationContext());
+			viewPoint.setBackgroundResource(R.drawable.gray_shape);
+			LayoutParams params = new LayoutParams(10, 10);
+			if(i != 0){
+				params.leftMargin = 10;
+			}
+			ll_points.setLayoutParams(params);
+			ll_points.addView(viewPoint);
 		}
 		adapter = new MyAdapter();
 		viewPager.setAdapter(adapter);
