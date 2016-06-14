@@ -12,10 +12,12 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 
 import com.example.smartbj.R;
 import com.example.smartbj.tools.MyConstants;
@@ -34,7 +36,7 @@ public class GuideActivity extends Activity{
 	private Button btn_tiya;
 	private List<ImageView> list;
 	private MyAdapter adapter;
-
+	private int distants;//两点之间的距离
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,6 +46,9 @@ public class GuideActivity extends Activity{
 		initEvents();
 	}
 
+	/**
+	 * 
+	 */
 	private void initEvents() {
 		btn_tiya.setOnClickListener(new OnClickListener() {
 			
@@ -68,12 +73,28 @@ public class GuideActivity extends Activity{
 			@Override
 			public void onPageScrolled(int position, float positionOffset,
 					int positionOffsetPixels) {
-				
+				///positionOffset  比例
+				float leftMargin = distants * (position +positionOffset);
+				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view_red.getLayoutParams();
+				layoutParams.leftMargin = (int) Math.round(leftMargin);
+				view_red.setLayoutParams(layoutParams);
 			}
 			
 			@Override
 			public void onPageScrollStateChanged(int state) {
 				
+			}
+		});
+		//view加载出来的监听事件
+		view_red.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			
+			
+
+			@SuppressWarnings("deprecation")
+			@Override
+			public void onGlobalLayout() {
+				view_red.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+				distants = ll_points.getChildAt(1).getLeft() - ll_points.getChildAt(0).getLeft();
 			}
 		});
 	}
