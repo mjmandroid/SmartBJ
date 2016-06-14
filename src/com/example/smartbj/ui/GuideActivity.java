@@ -93,7 +93,7 @@ public class GuideActivity extends Activity{
 			if(i != 0){
 				params.leftMargin = 10;
 			}
-			ll_points.setLayoutParams(params);
+			viewPoint.setLayoutParams(params);
 			ll_points.addView(viewPoint);
 		}
 		adapter = new MyAdapter();
