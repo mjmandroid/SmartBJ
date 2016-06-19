@@ -58,6 +58,7 @@ public class GuideActivity extends Activity{
 				SPtools.setBoolean(getApplicationContext(), MyConstants.ISSETUP, true);
 				Intent intent = new Intent(GuideActivity.this,MainActivity.class);
 				startActivity(intent);
+				GuideActivity.this.finish();
 			}
 		});
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {

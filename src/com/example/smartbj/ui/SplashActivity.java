@@ -83,9 +83,11 @@ public class SplashActivity extends Activity implements AnimationListener{
 		if(!SPtools.getBoolean(getApplicationContext(), MyConstants.ISSETUP, false)){
 			Intent intent = new Intent(this, GuideActivity.class);
 			startActivity(intent);
+			finish();
 		} else{
 			Intent intent = new Intent(this,MainActivity.class);
 			startActivity(intent);
+			finish();
 		}
 	}
 

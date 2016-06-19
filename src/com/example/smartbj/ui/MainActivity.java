@@ -1,6 +1,7 @@
 package com.example.smartbj.ui;
 
 import com.example.smartbj.R;
+import com.example.smartbj.view.BaseFragment;
 import com.example.smartbj.view.LeftMenuFragment;
 import com.example.smartbj.view.MainContentFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -49,5 +50,11 @@ public class MainActivity extends SlidingFragmentActivity {
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		menu.setBehindOffset(300);
 
+	}
+	public BaseFragment getLeftFragment(){
+		return (BaseFragment) fragmentManager.findFragmentByTag(LEFT_MENU);
+	}
+	public BaseFragment getMainFragment(){
+		return (BaseFragment) fragmentManager.findFragmentByTag(MAIN_MENU);
 	}
 }
