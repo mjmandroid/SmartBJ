@@ -20,6 +20,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 
 import com.example.smartbj.R;
+import com.example.smartbj.tools.DensityUtils;
 import com.example.smartbj.tools.MyConstants;
 import com.example.smartbj.tools.SPtools;
 
@@ -110,7 +111,9 @@ public class GuideActivity extends Activity{
 			
 			View viewPoint = new View(getApplicationContext());
 			viewPoint.setBackgroundResource(R.drawable.gray_shape);
-			LayoutParams params = new LayoutParams(10, 10);
+			int dip = 10;
+			LayoutParams params = new LayoutParams(DensityUtils.dip2px(getApplicationContext(), dip),
+					DensityUtils.dip2px(getApplicationContext(), dip));
 			if(i != 0){
 				params.leftMargin = 10;
 			}

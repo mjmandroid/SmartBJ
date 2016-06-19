@@ -15,6 +15,22 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
-
+    </style><!-- android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:text="首页"
+	        android:button="@null"
+	        android:gravity="center_horizontal"
+	        android:drawablePadding="5dp" android:textSize="14sp"
+	        android:textColor="@color/btn_color_select"-->
+	<style name="radiobutton_style">
+	    <item name="android:textColor">@color/rb_color_select</item>
+	    <item name="android:layout_width">0dp</item>
+	    <item name="android:layout_weight">1</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:button">@null</item>
+	    <item name="android:gravity">center_horizontal</item>
+	    <item name="android:drawablePadding">5dp</item>
+	    <item name="android:textSize">14sp</item>
+	</style>
 </resources>
