@@ -23,4 +23,13 @@ public class SPtools {
 		SharedPreferences sharedPreferences = mContext.getSharedPreferences(MyConstants.CINFIG, mContext.MODE_PRIVATE);
 		return sharedPreferences.getBoolean(key, defaultValue);
 	}
+	public static void setString(Context mContext,String key,String value){
+		SharedPreferences sharedPreferences = mContext.getSharedPreferences(MyConstants.CINFIG, mContext.MODE_PRIVATE);
+		sharedPreferences.edit().putString(key, value).commit();
+	}
+	
+	public static String getString(Context mContext,String key,String defaultValue){
+		SharedPreferences sharedPreferences = mContext.getSharedPreferences(MyConstants.CINFIG, mContext.MODE_PRIVATE);
+		return sharedPreferences.getString(key, defaultValue);
+	}
 }

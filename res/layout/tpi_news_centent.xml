@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<RelativeLayout android:layout_width="fill_parent"
+	    android:layout_height="180dp">
+	    <android.support.v4.view.ViewPager
+	        android:layout_width="fill_parent"
+	        android:layout_height="match_parent"
+	        android:id="@+id/vp_tpi_news_centent">
+	    </android.support.v4.view.ViewPager>
+	    <RelativeLayout android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:background="#44000000">
+	        <TextView android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="智慧背景"
+	            android:id="@+id/tv_content"
+	            android:padding="5dp"
+	            android:layout_centerVertical="true"/>
+	        <LinearLayout android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/ll_news_centent"
+	            android:orientation="horizontal"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"
+	            android:paddingRight="10dp"></LinearLayout>
+	    </RelativeLayout>
+	</RelativeLayout>
+	<ListView android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:id="@+id/listview_news_centent"></ListView>
+</LinearLayout>

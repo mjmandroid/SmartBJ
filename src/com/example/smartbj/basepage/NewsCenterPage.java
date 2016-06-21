@@ -5,8 +5,11 @@ import java.util.List;
 
 import android.R.menu;
 import android.content.Context;
+import android.renderscript.Program.TextureType;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import com.example.smartbj.newscenter.NewsBaseNewsCenter;
 import com.example.smartbj.newscenter.PhotosBaseNewsCenter;
 import com.example.smartbj.newscenter.TopicBaseNewsCenter;
 import com.example.smartbj.tools.MyConstants;
+import com.example.smartbj.tools.SPtools;
 import com.example.smartbj.ui.MainActivity;
 import com.example.smartbj.view.LeftMenuFragment;
 import com.example.smartbj.view.LeftMenuFragment.SwitchPagerListener;
@@ -37,6 +41,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 public class NewsCenterPage extends BasePage implements SwitchPagerListener{
 	private List<BaseNewsCenter> newsCenters = new ArrayList<BaseNewsCenter>();
 	private NewsCenterEntity entity;
+	private Gson gson;
 	public NewsCenterPage(Context context) {
 		super(context);
 		MainActivity mainActivity = (MainActivity) context;
@@ -46,24 +51,33 @@ public class NewsCenterPage extends BasePage implements SwitchPagerListener{
 	@Override
 	public void initData() {
 		super.initData();
-		HttpUtils httpUtils = new HttpUtils();
-		httpUtils.send(HttpMethod.GET, MyConstants.NEWSCENTERURL, new RequestCallBack<String>() {
+		String jsonString = SPtools.getString(context, MyConstants.NEWSCENTERURL, "");
+		if(!TextUtils.isEmpty(jsonString)) {
+			parserJson(jsonString);
+		}else {
+			HttpUtils httpUtils = new HttpUtils();
+			httpUtils.send(HttpMethod.GET, MyConstants.NEWSCENTERURL, new RequestCallBack<String>() {
 
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo) {
-				String jsonString = responseInfo.result;
-				parserJson(jsonString);
-			}
+				@Override
+				public void onSuccess(ResponseInfo<String> responseInfo) {
+					String jsonString = responseInfo.result;
+					SPtools.setString(context, MyConstants.NEWSCENTERURL, jsonString);
+					parserJson(jsonString);
+				}
 
-			@Override
-			public void onFailure(HttpException error, String msg) {
-				Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
-			}
-		});
+				@Override
+				public void onFailure(HttpException error, String msg) {
+					Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+				}
+			});
+		}
+		
 		
 	}
 	protected void parserJson(String jsonString) {
-		Gson gson = new Gson();
+		if(gson == null) {
+			gson = new Gson();
+		}
 		entity = gson.fromJson(jsonString, NewsCenterEntity.class);
 		MainActivity mainActivity = (MainActivity) context;
 		LeftMenuFragment leftMenuFragment = (LeftMenuFragment) mainActivity.getLeftFragment();
@@ -73,7 +87,7 @@ public class NewsCenterPage extends BasePage implements SwitchPagerListener{
 			BaseNewsCenter newsCenter = null;
 			switch (data.type) {
 			case 1://新闻
-				newsCenter = new NewsBaseNewsCenter(mainActivity);
+				newsCenter = new NewsBaseNewsCenter(mainActivity,entity.data.get(0).children);
 				break;
 			case 10://专题 
 				newsCenter = new TopicBaseNewsCenter(mainActivity);
@@ -102,6 +116,7 @@ public class NewsCenterPage extends BasePage implements SwitchPagerListener{
 		tv_title.setText(entity.data.get(position).title);
 		fl.removeAllViews();
 		fl.addView(view);
+		baseNewsCenter.initData();//初始化数据
 	}
 	@Override
 	public void onSwitchPage(int p) {
