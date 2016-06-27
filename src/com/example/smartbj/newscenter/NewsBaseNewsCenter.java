@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.smartbj.R;
 import com.example.smartbj.domain.NewsCenterEntity.NewsData.ViewTagData;
+import com.example.smartbj.newstpi.TPINewsNewscenterPager;
 import com.example.smartbj.ui.MainActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
@@ -97,11 +98,15 @@ public class NewsBaseNewsCenter extends BaseNewsCenter {
 
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
-			TextView tv = new TextView(context);
-			tv.setText(childrens.get(position).title);
-			tv.setGravity(Gravity.CENTER);
-			container.addView(tv);
-			return tv;
+//			TextView tv = new TextView(context);
+//			tv.setText(childrens.get(position).title);
+//			tv.setGravity(Gravity.CENTER);
+//			container.addView(tv);
+//			return tv;
+			TPINewsNewscenterPager pager = new TPINewsNewscenterPager(context,childrens.get(position));
+			View view = pager.getRoot();
+			container.addView(view);
+			return view;
 		}
 
 		@Override

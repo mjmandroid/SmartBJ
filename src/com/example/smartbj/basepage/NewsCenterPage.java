@@ -7,6 +7,7 @@ import android.R.menu;
 import android.content.Context;
 import android.renderscript.Program.TextureType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Space;
@@ -77,7 +78,7 @@ public class NewsCenterPage extends BasePage implements SwitchPagerListener{
 	protected void parserJson(String jsonString) {
 		if(gson == null) {
 			gson = new Gson();
-		}
+		}Log.e("Tag", jsonString);
 		entity = gson.fromJson(jsonString, NewsCenterEntity.class);
 		MainActivity mainActivity = (MainActivity) context;
 		LeftMenuFragment leftMenuFragment = (LeftMenuFragment) mainActivity.getLeftFragment();

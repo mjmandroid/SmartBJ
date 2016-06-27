@@ -9,4 +9,5 @@ public interface MyConstants {
 	String CINFIG = "cachevaluse";
 	String ISSETUP = "issetup";
 	String NEWSCENTERURL = "http://123.135.128.105:8080/zhbj/categories.json";
+	String SERVERURL = "http://123.135.128.105:8080/zhbj";
 }

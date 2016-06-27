@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp" >
+    <ImageView android:id="@+id/iv_item"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:src="@drawable/pic_item_list_default"
+        android:background="#000000"
+        android:padding="1dp"
+        android:scaleType="fitXY"/>
+	<TextView android:id="@+id/tv_listView_item_title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_toRightOf="@id/iv_item"
+	    android:text="aasada"
+	    android:layout_marginLeft="10dp"/>
+	<TextView android:id="@+id/tv_listView_item_time"
+	    android:layout_below="@id/tv_listView_item_title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_toRightOf="@id/iv_item"
+	    android:text="2012"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginTop="10dp"/>
+	<ImageView android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="10dp"
+	    android:src="@drawable/icon_news_comment_num"
+	    android:layout_alignBottom="@id/tv_listView_item_time"
+	    android:id="@+id/iv_commount"/>
+</RelativeLayout>
