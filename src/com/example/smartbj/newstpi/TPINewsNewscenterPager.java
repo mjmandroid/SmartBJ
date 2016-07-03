@@ -34,6 +34,8 @@ import com.example.smartbj.tools.DensityUtils;
 import com.example.smartbj.tools.MyConstants;
 import com.example.smartbj.tools.SPtools;
 import com.example.smartbj.ui.MainActivity;
+import com.example.smartbj.view.RefreshListView;
+import com.example.smartbj.view.RefreshListView.OnRefreshDataListenter;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -63,7 +65,7 @@ public class TPINewsNewscenterPager {
 	private LinearLayout llLayoutPoints;
 	
 	@ViewInject(R.id.listview_news_centent)
-	private ListView listView;
+	private RefreshListView listView;
 	
 	@ViewInject(R.id.tv_content)
 	private TextView tv_content;
@@ -74,6 +76,8 @@ public class TPINewsNewscenterPager {
 	private int selectIndex;
 	private List<News> news  = new ArrayList<TpiNewsCenterEntity.Data.News>();
 	private NewsAdapter newsAdapter;
+	private boolean isRerfsh = false;
+	
 	
 	public View getRoot() {
 		return root;
@@ -110,6 +114,20 @@ public class TPINewsNewscenterPager {
 			@Override
 			public void onPageScrollStateChanged(int state) {
 				// TODO Auto-generated method stub
+				
+			}
+		});
+		listView.setOnRefreshDataListenter(new OnRefreshDataListenter() {
+			
+			@Override
+			public void refreshData() {
+				isRerfsh = true;
+				getDataFromNetWork();
+			}
+
+			@Override
+			public void loadMore() {
+				
 				
 			}
 		});
@@ -317,12 +335,18 @@ public class TPINewsNewscenterPager {
 				SPtools.setString(mainActivity, MyConstants.SERVERURL, jsonString);
 				TpiNewsCenterEntity jsonData = parserJsonData(jsonString);
 				processData(jsonData);
+				if (isRerfsh) {
+					listView.refreshFinish();
+				}
+				
 			}
 
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				Toast.makeText(mainActivity, "网络请求失败", 0).show();
-				
+				if (isRerfsh) {
+					listView.refreshFinish();
+				}
 			}
 		});
 		
@@ -333,7 +357,7 @@ public class TPINewsNewscenterPager {
 		ViewUtils.inject(this, root);
 		View headView = View.inflate(mainActivity, R.layout.viewpager_headview, null);
 		ViewUtils.inject(this, headView);
-		listView.addHeaderView(headView);
+		listView.addView(headView);
 	}
 	private TpiNewsCenterEntity parserJsonData(String jsonString){
 		if(gson == null){

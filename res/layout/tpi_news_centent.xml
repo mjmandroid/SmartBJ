@@ -3,8 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-   
-	<ListView android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:id="@+id/listview_news_centent"></ListView>
+
+    <com.example.smartbj.view.RefreshListView
+        android:id="@+id/listview_news_centent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </com.example.smartbj.view.RefreshListView>
+
 </LinearLayout>

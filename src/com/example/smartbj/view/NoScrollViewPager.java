@@ -13,6 +13,7 @@ import android.view.MotionEvent;
  */
 public class NoScrollViewPager extends MyViewPager{
 
+	private float downY;
 	public NoScrollViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
@@ -22,12 +23,28 @@ public class NoScrollViewPager extends MyViewPager{
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
+		/*switch (ev.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			downY = ev.getY();
+			break;
+		case MotionEvent.ACTION_MOVE:
+			float moveY = ev.getY();
+			float dy = moveY - downY;
+			if(dy > 0) {
+				return super.onTouchEvent(ev);
+			}
+			break;
+		case MotionEvent.ACTION_UP:
+			
+			break;
+		default:
+			break;
+		}*/
 		return false;
 	}
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		return super.onInterceptHoverEvent(ev);
+		
+		return false;
 	}
 }
